@@ -29,12 +29,12 @@ def login(request):
         return redirect('search')
         # return render(request, 'mainApp/search.html')
     else:
-        user = User.objects.create(username='fucku2')
-        user.set_password('fuckutwice')
-        user.save()
-        auth.login(request, user)
-        # return HttpResponse('fuck u')
-        return render(request, 'mainApp/auth.html')
+        # user = User.objects.create(username='fucku2')
+        # user.set_password('fuckutwice')
+        # user.save()
+        # auth.login(request, user)
+        return HttpResponse('fuck u')
+        # return render(request, 'mainApp/auth.html')
 
 
 def search(request):
