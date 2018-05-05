@@ -27,7 +27,7 @@ SECRET_KEY = 'vdiv)64(5xu9m_ak0pkt^5k5(mg4sy5)1kmw9=4m075k2ov-8o'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['turmezzz.pythonanywhere.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'turmezzz.pythonanywhere.com']
 
 
 # Application definition
