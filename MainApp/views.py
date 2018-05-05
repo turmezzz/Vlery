@@ -33,7 +33,7 @@ def login(request):
 
 
 def logout(request):
-    logout(request)
+    auth.logout(request)
     return redirect('')
 
 
