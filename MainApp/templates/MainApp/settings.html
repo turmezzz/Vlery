@@ -1,0 +1,140 @@
+{% load staticfiles %}
+<!-- 
+	<div class="onoffswitch">
+    		<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch" checked>
+    		<label class="onoffswitch-label" for="switch">
+        		<span class="onoffswitch-inner"></span>
+        		<span class="onoffswitch-switch"></span>
+    		</label>
+	</div>
+ -->
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'css/settings_style.css' %}" media="screen" type="text/css"/>
+
+		<title>Настройки</title>
+	</head>
+	<body>
+		<p class="logo">Vlery</p>
+		<p class="phrase">Настройте свой личный поиск</p>
+		<hr class="separate">
+
+		<form action="settings">
+			<!-- Доступ к личным сообщениям -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch1" value="messages">
+		   			<label class="onoffswitch-label" for="switch1">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к личным сообщениям</div>
+			</div>
+
+			<!-- Доступ к общей информации -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch2" value="information">
+		   			<label class="onoffswitch-label" for="switch2">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к общей информации</div>
+			</div>
+
+			<!-- Доступ к списку Ваших друзей -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch3" value="friends">
+		   			<label class="onoffswitch-label" for="switch3">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к списку Ваших друзей</div>
+			</div>
+
+			<!-- Доступ к фотографиям -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch4" value="photos">
+		   			<label class="onoffswitch-label" for="switch4">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к фотографиям</div>
+			</div>
+
+			<!-- Доступ к видеозаписям -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch5" value="videos">
+		   			<label class="onoffswitch-label" for="switch5">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к видеозаписям</div>
+			</div>
+
+			<!-- Доступ к стене -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch6" value="wall">
+		   			<label class="onoffswitch-label" for="switch6">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к стене</div>
+			</div>
+
+			<!-- Доступ к заметкам, wiki-страницам и документам -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch8" value="docs">
+		   			<label class="onoffswitch-label" for="switch8">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к заметкам, документам</div>
+			</div>
+
+			<!-- Доступ к группам -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch9" value="groups">
+		   			<label class="onoffswitch-label" for="switch9">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к группам</div>
+			</div>
+
+			<!-- Доступ к электронному адресу -->
+			<div class="set">
+				<div class="onoffswitch inlb tumbler">	
+		    		<input  name="" type="checkbox" class="onoffswitch-checkbox" id="switch10" value="email">
+		   			<label class="onoffswitch-label" for="switch10">
+		       			<span class="onoffswitch-inner"></span>
+		       			<span class="onoffswitch-switch"></span>
+		    		</label>
+				</div>
+				<div class="inlb label">Доступ к электронному адресу</div>
+			</div>
+
+			<p class="save_button">
+	   	       	<input class="submit" type="submit" value="сохранить">
+	        </p>
+
+		</form>
+
+	</body>
+</html>

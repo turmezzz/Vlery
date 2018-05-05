@@ -1,0 +1,67 @@
+@import url(https://fonts.googleapis.com/css?family=Catamaran);
+
+
+/*
+	vlery green color is #86D661
+
+	vk blue color bright is #5181b8
+	vk blue color dark is #2a5885
+*/
+
+.login {
+	margin: auto;
+	width: 280px;
+}
+
+.logo{
+	width: 280px;
+	margin: 100px auto 20px;
+	color: white;
+	font-size: 100px;
+	text-align: center;
+	font-weight: 900;
+	font-family: 'Catamaran', sans-serif; 
+}
+
+.button_vk_auth{
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+	font-weight: bold;
+	margin-bottom: 2em;
+	text-transform: uppercase;
+	cursor:pointer;
+	width: 280px;
+	height: 50px;
+	outline:none;
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
+	padding: 0;
+	-webkit-appearance: none;
+
+	color: white;
+	background-color: #5181b8;
+}
+
+.button_vk_auth:hover{
+	background-color: #2a5885;
+}
+
+body {
+	background-color: #86D661;
+	color: #606468;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	line-height: 1.5em;
+}
+
+a {
+	color: white;
+	text-decoration: none;
+}
+
+p {
+	line-height: 1.5em;
+}

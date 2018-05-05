@@ -1,0 +1,134 @@
+@import url(https://fonts.googleapis.com/css?family=Catamaran);
+
+
+/*
+	vlery green color is #86D661
+
+	vlery bright purple color is #ea4c88
+	vlery dark purple color is #d44179
+
+	darkgrey color is #606468
+
+	vk bright blue color is #5181b8
+	vk dark blue color is #2a5885
+*/
+
+.brd {
+	border: 1px solid red;
+}
+
+.ava {
+	padding: 10px;
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+	border-radius: 100px;
+}
+
+.name {
+	display: inline-block;
+	line-height: none;
+	position: absolute;
+	top: 8px;
+	left: 70px;
+}
+
+.settings {
+	position: absolute;
+	width: 200px;
+	height: 60px;
+	right: 10px;
+	top: 10px;
+}
+
+.post {
+	padding: 0px 10px;
+	width: 600px;
+	margin: 40px auto 10px;
+	border: 1px solid lightgrey;
+	border-radius: 3px;
+	background-color: white;
+	box-shadow: 0 0 1px 1px lightgrey;
+	line-height: 20px;
+	padding-top: 10px;
+}
+
+.txt{
+	text-decoration: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 15px;
+}
+
+.post > hr {
+	width: 600px;
+	color: lightgrey;
+}
+
+.post > a, a:visited {
+	text-decoration: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 13px;
+	color: grey;
+}
+
+.output {	
+	/*some shit*/
+}
+
+.border {
+	border: 2px solid red;
+}
+
+.center {
+	text-align: center;
+}
+
+.logo {
+	width: 280px;
+	margin: 0px auto;
+	color: white;
+	font-size: 80px;
+	text-align: center;
+	font-weight: 900;
+	font-family: 'Catamaran', sans-serif; 
+}
+
+.head {
+	height: 200px;
+	background-color: #86D661;
+}
+
+.search {
+	margin: 0px auto;
+	width: 500px;
+}
+
+.queue {
+	border-radius: 3px;
+	height: 30px;
+	outline:none;
+	margin-bottom: 1em;
+	padding: 0 15px;
+	width: 300px;
+
+	color: #606468;
+	background-color: white;
+}
+
+input {
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+}
+
+body {
+	background-color: white;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	margin: 0px;
+	/*height: 100%;*/
+}
+
+/*html {
+	height: 100%;
+}*/

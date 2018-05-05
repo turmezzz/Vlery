@@ -1,0 +1,108 @@
+@import url(https://fonts.googleapis.com/css?family=Catamaran);
+
+
+/*
+	vlery green color is #86D661
+
+	vlery bright purple color is #ea4c88
+	vlery dark purple color is #d44179
+
+	darkgrey color is #606468
+
+	vk bright blue color is #5181b8
+	vk dark blue color is #2a5885
+*/
+.logout {
+	top: 0px;
+}
+
+.brd {
+	border: 1px solid red;
+}
+
+.ava {
+	padding: 10px;
+	height: 40px;
+	width: 40px;
+	display: inline-block;
+	border-radius: 100px;
+}
+
+.name {
+	display: inline-block;
+	line-height: none;
+	position: absolute;
+	top: 8px;
+	left: 70px;
+}
+
+.settings {
+	position: absolute;
+	width: 200px;
+	height: 60px;
+	right: 10px;
+	top: 10px;
+}
+
+.logo {
+	width: 280px;
+	margin: 100px auto 0px;
+	color: white;
+	font-size: 120px;
+	text-align: center;
+	font-weight: 900;
+	font-family: 'Catamaran', sans-serif;
+}
+
+.search {
+	margin: 0px auto;
+	width: 500px;
+}
+
+.queue {
+	border-radius: 3px;
+	height: 40px;
+	outline:none;
+	margin-bottom: 1em;
+	padding: 0 15px;
+	width: 400px;
+
+	color: #606468;
+	background-color: white;
+}
+
+.submit {
+	height: 30px;
+	outline:none;
+	border-radius: 3px;
+	margin-bottom: 2em;
+	text-transform: uppercase;
+	font-size: 10px;
+	width: 100px;
+
+	background-color: #ea4c88;
+	color: white;
+}
+
+.submit:hover {
+	background-color: #d44179;
+	color: white
+}
+
+input {
+	border: none;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+	padding: 0;
+	-webkit-appearance: none;
+}
+
+body {
+	background-color: #86D661;
+	font-family: 'Open Sans', Arial, sans-serif;
+	font-size: 14px;
+}
+
+p {
+	text-align: center;
+}

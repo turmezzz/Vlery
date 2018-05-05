@@ -1,0 +1,30 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'css/search_style.css' %}" media="screen" type="text/css"/>
+
+		<title>Поиск</title>
+	</head>
+	<body>
+		<div class="logout">
+			<a href="/logout"> Выйти </a>
+		</div>
+		<div class="settings">
+			<img src="{{ img_url }}" class="ava">
+			<!-- <img src="https://pp.userapi.com/c637117/v637117242/5b3ac/pBlG-5UZScc.jpg" class="ava"> -->
+			<p class="name">{{ name }}</p>
+		</div>
+		<p class="logo">Vlery</p>
+		<div class="search">
+	        <form action="queue">
+	            <p>
+	                <input class="queue" type="text">
+	            </p>
+	            <p>
+	               	<input class="submit" type="submit" value="поиск">
+	            </p>
+	        </form>
+    	</div>
+	</body>
+</html>

@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="{% static 'css/output_style.css' %}" media="screen" type="text/css"/>
+		
+
+		<title>{{ queue }} - поиск</title>
+	</head>
+	<body>
+		<div class="settings brd">
+			<!-- <img src="{{ img_url }}" class="brd"> -->
+			<img src="https://pp.userapi.com/c637117/v637117242/5b3ac/pBlG-5UZScc.jpg" class="ava brd">
+			<p class="name brd">{{ name }}</p>
+		</div>
+		<div class="head">
+			<p class="logo">Vlery</p>
+			<div class="search">
+	        	<form action="queue">
+	            	<p class="center">
+	                	<input class="queue" type="text" value="{{ queue }}">
+	            	</p> 
+	        	</form>
+    		</div>
+    	</div>
+    	<div class="output">
+    		{% for post in posts %}
+	    		<div class="post">
+	    			<a href="{{ post.link }}">
+	    				перейти к оригиналу
+	    			</a>
+	    			<hr>
+	    			<p class="txt">
+	    				{{ post.txt }}
+	    			</p>
+	    			{% for img in post.imgs %}
+	    				<img src="img.link">
+	    			{% endfor %}
+	    		</div>
+	    	{% endfor %}
+    	</div>
+	</body>
+</html>
