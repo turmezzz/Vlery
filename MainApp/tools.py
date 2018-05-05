@@ -6,7 +6,7 @@ class Tool:
     api = None
     user = None
 
-    def __int__(self, request):
+    def __init__(self, request):
         self.user = request.user
         access_token = self.user.username
         session = vk.Session(access_token=access_token)
