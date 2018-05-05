@@ -27,11 +27,11 @@ def login(request):
     if request.user.is_authenticated():
         return redirect('search')
     else:
-        return render(request, 'mainApp/auth.html')
+        return render(request, 'MainApp/auth.html')
 
 
 def search(request):
-    return render(request, 'mainApp/search.html')
+    return render(request, 'MainApp/search.html')
 
 
 
