@@ -1,10 +1,13 @@
 import urllib
 import json
+import vk
+
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
 from MainApp.models import *
+from . import tools
 
 # Create your views here.
 
@@ -17,18 +20,21 @@ def get_access_token(request):
     url = f'https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}'
     data = json.loads(urllib.request.urlopen(url).read())
     access_token = data['access_token']
-    user = User.objects.create(username=access_token)
+
+
+
+    # user = User.objects.create(username=access_token)
+    user = User.objects.create(username=str(data))
     user.set_password('password')
     user.save()
     auth.authenticate(username=access_token, password='password')
     auth.login(request, user)
-    return redirect('search')
-
+    return redirect('home')
 
 
 def login(request):
     if request.user.is_authenticated():
-        return redirect('search')
+        return redirect('home')
     else:
         return render(request, 'MainApp/auth.html')
 
@@ -38,15 +44,17 @@ def logout(request):
     return redirect('login')
 
 
-def search(request):
+def home(request):
     if not request.user.is_authenticated():
         return redirect('login')
 
-    img_url = 'https://pp.userapi.com/c637117/v637117242/5b3ac/pBlG-5UZScc.jpg'
-    name = request.user.username
-    data = {'img_url': img_url, 'name': name}
+    tool = tools.Tool(request)
+    img_url = tool.get_img_url()
+    name = tool.get_name()
 
-    return render(request, 'MainApp/search.html', data)
+    data = {'img_url': img_url, 'name': name}
+    return render(request, 'MainApp/home.html', data)
+
 
 
 
