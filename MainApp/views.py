@@ -38,6 +38,9 @@ def logout(request):
 
 
 def search(request):
+    if not request.user.is_authenticated():
+        return redirect('login')
+
     return render(request, 'MainApp/search.html')
 
 
