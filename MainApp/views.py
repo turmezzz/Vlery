@@ -25,6 +25,7 @@ def get_access_token(request):
     return redirect('search')
 
 
+
 def login(request):
     if request.user.is_authenticated():
         return redirect('search')
@@ -41,7 +42,11 @@ def search(request):
     if not request.user.is_authenticated():
         return redirect('login')
 
-    return render(request, 'MainApp/search.html')
+    img_url = 'https://pp.userapi.com/c637117/v637117242/5b3ac/pBlG-5UZScc.jpg'
+    name = request.user.username
+    data = {'img_url': img_url, 'name': name}
+
+    return render(request, 'MainApp/search.html', data)
 
 
 
