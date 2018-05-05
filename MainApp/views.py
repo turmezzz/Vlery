@@ -34,7 +34,7 @@ def login(request):
 
 def logout(request):
     logout(request)
-    return redirect('login')
+    return redirect('')
 
 
 def search(request):
