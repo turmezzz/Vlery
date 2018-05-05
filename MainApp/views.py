@@ -25,8 +25,8 @@ def get_access_token(request):
 
 
 
-    # user = User.objects.create(username=access_token, vk_id=vk_id)
-    user = User.objects.create(username=str(data), vk_id=vk_id)
+    user = User.objects.create(username=access_token, vk_id=vk_id)
+    # user = User.objects.create(username=str(data), vk_id=vk_id)
     user.set_password('password')
     user.save()
     auth.authenticate(username=access_token, password='password')
