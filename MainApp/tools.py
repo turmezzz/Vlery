@@ -3,9 +3,6 @@ import vk
 
 class Tool:
 
-    api = None
-    user = None
-
     def __init__(self, request):
         self.user = request.user
         access_token = self.user.username

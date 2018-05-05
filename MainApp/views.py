@@ -22,7 +22,7 @@ def get_access_token(request):
     data = json.loads(urllib.request.urlopen(url).read())
     access_token = data['access_token']
     vk_id = data['user_id']
-    return HttpResponse(str(access_token) + ' ' + str(vk_id))
+    # return HttpResponse(str(access_token) + ' ' + str(vk_id))
 
 
 
@@ -48,7 +48,8 @@ def logout(request):
 
 def home(request):
     if not request.user.is_authenticated():
-        return redirect('login')
+        return HttpResponse(str(request.user))
+        # return redirect('login')
 
     tool = tools.Tool(request)
     # img_url = tool.get_img_url()
