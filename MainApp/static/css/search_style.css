@@ -36,6 +36,14 @@
 	left: 70px;
 }
 
+.logout {
+	display: inline-block;
+	line-height: none;
+	position: absolute;
+	top: 8px;
+	left: 70px;
+}
+
 .settings {
 	position: absolute;
 	width: 200px;
