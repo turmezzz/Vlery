@@ -16,13 +16,14 @@ def get_access_token(request):
     redirect_uri = 'http://turmezzz.pythonanywhere.com/get_access_token'
     code = request.GET['code']
     url = f'https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}'
-
+    data = json.loads(urllib.request.urlopen(url).read())
+    access_token = data['access_token']
     # access_token = json.loads(urllib.request.urlopen(url).read())
     # auth.login(request, login=access_token, password='password')
     # new
-    # return HttpResponse(access_token)
+    return HttpResponse(access_token)
     # return redirect('search')
-    return HttpResponse(urllib.request.urlopen(url).read())
+    # return HttpResponse(urllib.request.urlopen(url).read())
 
 
 def login(request):
