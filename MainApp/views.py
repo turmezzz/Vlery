@@ -48,9 +48,11 @@ def home(request):
     if not request.user.is_authenticated():
         return redirect('login')
 
-    tool = tools.Tool(request)
-    img_url = tool.get_img_url()
-    name = tool.get_name()
+    # tool = tools.Tool(request)
+    # img_url = tool.get_img_url()
+    # name = tool.get_name()
+    img_url = ''
+    name = ''
 
     data = {'img_url': img_url, 'name': name}
     return render(request, 'MainApp/home.html', data)
