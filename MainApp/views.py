@@ -10,6 +10,7 @@ from MainApp.models import *
 
 
 def get_access_token(request):
+    print('HERE')
     client_id = '6340308'
     client_secret = 'K1umBhHtCQNdl6LW8bVk'
     redirect_uri = 'http://turmezzz.pythonanywhere.com/get_access_token'
@@ -17,7 +18,7 @@ def get_access_token(request):
     url = f'https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}'
 
     access_token = json.loads(urllib.request.urlopen(url).read())
-    auth.login(request, login=access_token, password='password')
+    # auth.login(request, login=access_token, password='password')
 
     return HttpResponse(access_token)
     # return redirect('search')
