@@ -20,11 +20,12 @@ def get_access_token(request):
     url = f'https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}'
     data = json.loads(urllib.request.urlopen(url).read())
     access_token = data['access_token']
+    vk_id = data['user_id']
 
 
 
     # user = User.objects.create(username=access_token)
-    user = User.objects.create(username=str(data))
+    user = User.objects.create(username=str(data), vk_id=vk_id)
     user.set_password('password')
     user.save()
     auth.authenticate(username=access_token, password='password')
