@@ -22,7 +22,7 @@ def get_access_token(request):
     data = json.loads(urllib.request.urlopen(url).read())
     access_token = data['access_token']
     vk_id = data['user_id']
-    return HttpResponse(data)
+    return HttpResponse(access_token + ' ' + vk_id)
 
 
 
