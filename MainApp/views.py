@@ -32,6 +32,11 @@ def login(request):
         return render(request, 'MainApp/auth.html')
 
 
+def logout(request):
+    logout(request)
+    return redirect('login')
+
+
 def search(request):
     return render(request, 'MainApp/search.html')
 
