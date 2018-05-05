@@ -19,7 +19,7 @@ def get_access_token(request):
 
     access_token = json.loads(urllib.request.urlopen(url).read())
     # auth.login(request, login=access_token, password='password')
-
+    # new
     return HttpResponse(access_token)
     # return redirect('search')
 
