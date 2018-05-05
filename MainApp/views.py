@@ -1,9 +1,10 @@
 import urllib
+import json
 
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from flask import json
+# from flask import json
 from MainApp.models import *
 
 # Create your views here.
