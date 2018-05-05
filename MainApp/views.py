@@ -22,11 +22,11 @@ def get_access_token(request):
     data = json.loads(urllib.request.urlopen(url).read())
     access_token = data['access_token']
     vk_id = data['user_id']
+    return HttpResponse(data)
 
 
 
     user = User.objects.create(username=access_token, vk_id=vk_id)
-    # user = User.objects.create(username=str(data), vk_id=vk_id)
     user.set_password('password')
     user.save()
     auth.authenticate(username=access_token, password='password')
