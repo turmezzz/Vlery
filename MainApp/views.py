@@ -28,12 +28,9 @@ def get_access_token(request):
         user.set_password('password')
         user.save()
         auth.authenticate(username=vk_id, password='password')
-        auth.login(request, user)
     else:
-        user = User.objects.get(username=vk_id)
-        user.access_token = access_token
-        user.save()
-        auth.login(request, user)
+        user = User.objects.get(username=vk_id, access_token=access_token)
+    auth.login(request, user)
     return redirect('home')
 
 
