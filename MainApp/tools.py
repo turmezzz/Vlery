@@ -13,13 +13,14 @@ class Tool:
         vk_id = self.user.username
         # ret = self.api.users.get(user_id=vk_id, v=5.74, fields='photo_50')[0]['photo_50']
         # return ret
-        return self.user.access_token
+        return self.user.username
 
     def get_name(self):
         vk_id = self.user.username
         # data = self.api.users.get(user_id=vk_id, v=5.74)
         # ret = data[0]['first_name']
         # return ret
-        return self.user.username
+
+        return self.user.access_token
 
 
