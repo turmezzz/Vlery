@@ -24,7 +24,8 @@ def get_access_token(request):
 
     user = auth.authenticate(username=vk_id, password='password')
     if user is None:
-        user = User.objects.create(username=vk_id, access_token=access_token)
+        user = User.objects.create(username=vk_id)
+        user.access_token = access_token
         user.set_password('password')
         user.save()
         auth.authenticate(username=vk_id, password='password')
