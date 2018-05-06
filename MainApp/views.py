@@ -16,21 +16,21 @@ def get_access_token(request):
     client_id = '6340308'
     client_secret = 'K1umBhHtCQNdl6LW8bVk'
     redirect_uri = 'http://turmezzz.pythonanywhere.com/get_access_token'
-    # redirect_uri = 'blank.html'
     code = request.GET['code']
     url = f'https://oauth.vk.com/access_token?client_id={client_id}&client_secret={client_secret}&redirect_uri={redirect_uri}&code={code}'
     data = json.loads(urllib.request.urlopen(url).read())
     access_token = data['access_token']
     vk_id = data['user_id']
-    # return HttpResponse(str(access_token) + ' ' + str(vk_id))
 
-
-
-    user = User.objects.create(username=access_token, vk_id=vk_id)
-    user.set_password('password')
-    user.save()
-    auth.authenticate(username=access_token, password='password')
-    auth.login(request, user)
+    user = auth.authenticate(username=vk_id, password='password')
+    if user is None:
+        user = User.objects.create(username=vk_id, access_token=access_token)
+        user.set_password('password')
+        user.save()
+        auth.authenticate(username=vk_id, password='password')
+        auth.login(request, user)
+    else:
+        auth.login(request, user)
     return redirect('home')
 
 
@@ -48,8 +48,8 @@ def logout(request):
 
 def home(request):
     if not request.user.is_authenticated():
-        return HttpResponse(str(request.user))
-        # return redirect('login')
+        # return HttpResponse(str(request.user))
+        return redirect('login')
 
     tool = tools.Tool(request)
     img_url = tool.get_img_url()
