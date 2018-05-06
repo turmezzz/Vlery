@@ -8,8 +8,8 @@ class User(AbstractUser):
     # vk_id is username
     # access_token = models.CharField(max_length=100, default='')
 
-    def __init__(self, username):
-        self.username = username
+    def __init__(self):
+        self.username = models.CharField(max_length=100, default='')
         self.access_token = models.CharField(max_length=100, default='')
 
     def __str__(self):
