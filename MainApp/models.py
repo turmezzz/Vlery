@@ -6,9 +6,7 @@ from django.contrib.auth.models import AbstractUser
 
 class User(AbstractUser):
     # vk_id is username
-
-    def __init__(self):
-        self.access_token = models.CharField(max_length=100, default='')
+    access_token = models.CharField(max_length=100, default='')
 
     def __str__(self):
         return self.username
