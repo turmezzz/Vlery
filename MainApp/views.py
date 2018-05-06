@@ -48,8 +48,8 @@ def logout(request):
 
 def home(request):
     if not request.user.is_authenticated():
-        # return HttpResponse(str(request.user))
-        return redirect('login')
+        return HttpResponse(str(request.user))
+        # return redirect('login')
 
     tool = tools.Tool(request)
     img_url = tool.get_img_url()
