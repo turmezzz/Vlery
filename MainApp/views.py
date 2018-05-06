@@ -51,7 +51,7 @@ def home(request):
         return HttpResponse(str(request.user))
         # return redirect('login')
 
-    return HttpResponse(request.user.access_token)
+    # return HttpResponse(request.user.access_token)
 
     tool = tools.Tool(request)
     img_url = tool.get_img_url()
