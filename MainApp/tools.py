@@ -1,6 +1,7 @@
 import vk
 
 from copy import deepcopy
+from .models import User
 
 
 class Tool:
@@ -8,11 +9,14 @@ class Tool:
     user = None
     api = None
 
-    def __init__(self, request):
-        self.user = deepcopy(request.user)
-        access_token = self.user.username
-        session = vk.Session(access_token=access_token)
-        self.api = deepcopy(vk.API(session))
+    def __init__(self, vk_id):
+        # self.user = deepcopy(request.user)
+        # access_token = self.user.username
+        # session = vk.Session(access_token=access_token)
+        # self.api = deepcopy(vk.API(session))
+
+        self.user = User.objects.get(username=vk_id)
+        self.api = vk.API(vk.Session(access_token=self.user.access_token))
 
     def get_img_url(self):
         vk_id = self.user.username
