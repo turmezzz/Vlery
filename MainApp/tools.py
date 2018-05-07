@@ -13,7 +13,7 @@ def get_content_from_post(post):
     if 'copy_history' in post:
         box = get_content_from_post(post['copy_history'])
         if box is not None:
-            text += box['text']
+            text += ' ' + box['text']
     ret = {'owner_id': owner_id,
            'post_id': post_id,
            'link': link,
@@ -51,15 +51,31 @@ class Tool:
             box = get_content_from_post(i)
             post = Post.objects.create(
                 owner_id=box['owner_id'],
-                # attachments=box['attachments'],
-                # comments=comments,
                 post_id=box['post_id'],
                 text=box['text'],
                 link=box['link'])
-                # link='')
             post.save()
             self.user.posts += ' ' + str(post.id)
         self.user.save()
+
+    def update_posts(self):
+        vk_id = self.user.username
+        data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
+
+        for i in data:
+            post_id = i['id']
+            post = Post.objects.get(owner_id=vk_id, post_id=post_id)
+            if post is None:
+                box = get_content_from_post(i)
+                post = Post.objects.create(owner_id=box['owner_id'],
+                                           post_id=box['post_id'],
+                                           text=box['text'],
+                                           link=box['link'])
+                post.save()
+                self.user.posts += ' ' + str(post.id)
+        self.user.save()
+
+
 
 
 

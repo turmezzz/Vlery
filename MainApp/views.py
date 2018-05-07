@@ -35,21 +35,10 @@ def get_access_token(request):
         user = User.objects.get(username=vk_id)
         user.access_token = access_token
         user.save()
+        tool = tools.Tool(request)
+        tool.update_posts()
         auth.login(request, user)
     return redirect('home')
-
-    # user = auth.authenticate(username=vk_id, password='password')
-    # if user is None:
-    #     user = User.objects.create(username=vk_id, access_token=access_token)
-    #     user.set_password('password')
-    #     user.save()
-    #     auth.authenticate(username=vk_id, password='password')
-    # else:
-    #     user = User.objects.get(username=vk_id)
-    #     user.access_token = access_token
-    #     user.save()
-    # auth.login(request, user)
-    # return redirect('home')
 
 
 def login(request):
