@@ -1,6 +1,6 @@
 import vk
 
-from .models import User
+from .models import User, Post
 
 
 class Tool:
@@ -24,5 +24,27 @@ class Tool:
         data = self.api.users.get(user_id=vk_id, v=5.74)
         ret = data[0]['first_name']
         return ret
+
+    def create_new_account(self):
+        vk_id = self.user.username
+        data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
+
+        for i in data:
+            owner_id = vk_id
+            attachments = i['attachments']
+            comments = i['comments']
+            id = i['id']
+            text = i['text']
+            link = 'http://vk.com/id' + owner_id + '?w=wall' + owner_id + '_' + id
+            post = Post(owner_id=owner_id,
+                        attachments=attachments,
+                        comments=comments,
+                        id=id,
+                        text=text,
+                        link=link)
+            post.save()
+            self.user += ' ' + str(post.id)
+        self.user.save()
+
 
 

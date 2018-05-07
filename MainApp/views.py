@@ -6,7 +6,7 @@ import vk
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from MainApp.models import *
+from MainApp.models import User
 from . import tools
 
 # Create your views here.
@@ -22,11 +22,16 @@ def get_access_token(request):
     access_token = data['access_token']
     vk_id = data['user_id']
 
+    global tool
+
+    tool = tools.Tool(request)
+
     user = auth.authenticate(username=vk_id, password='password')
     if user is None:
         user = User.objects.create(username=vk_id, access_token=access_token)
         user.set_password('password')
         user.save()
+        tool.create_new_account()
         auth.authenticate(username=vk_id, password='password')
     else:
         user = User.objects.get(username=vk_id)
@@ -34,6 +39,19 @@ def get_access_token(request):
         user.save()
     auth.login(request, user)
     return redirect('home')
+
+    # user = auth.authenticate(username=vk_id, password='password')
+    # if user is None:
+    #     user = User.objects.create(username=vk_id, access_token=access_token)
+    #     user.set_password('password')
+    #     user.save()
+    #     auth.authenticate(username=vk_id, password='password')
+    # else:
+    #     user = User.objects.get(username=vk_id)
+    #     user.access_token = access_token
+    #     user.save()
+    # auth.login(request, user)
+    # return redirect('home')
 
 
 def login(request):
@@ -52,12 +70,17 @@ def home(request):
     if not request.user.is_authenticated():
         return redirect('login')
 
-    tool = tools.Tool(request)
+    global tool
+    # tool = tools.Tool(request)
     img_url = tool.get_img_url()
     name = tool.get_name()
 
     data = {'img_url': img_url, 'name': name}
     return render(request, 'MainApp/home.html', data)
+
+
+tool = None
+
 
 
 
