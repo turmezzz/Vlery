@@ -22,6 +22,22 @@ def get_content_from_post(post):
     return ret
 
 
+def get_posts(user, api):
+    vk_id = user.username
+    post_count = api.wall.get(owner_id=vk_id, count=1, v=5.74)['count']
+    data = []
+    offset = 0
+    for i in range(post_count // 100):
+        box = api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
+        offset += 100
+        data += box
+    post_count %= 100
+    if post_count != 0:
+        box = api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
+        data += box
+    return data
+
+
 class Tool:
 
     user = None
@@ -45,24 +61,24 @@ class Tool:
         return ret
 
     def create_new_account(self):
-        vk_id = self.user.username
-        data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
-
+        # data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
+        data = get_posts(self.user, self.api)
         for i in data:
             box = get_content_from_post(i)
-            post = Post.objects.create(
-                owner_id=box['owner_id'],
-                post_id=box['post_id'],
-                text=box['text'],
-                link=box['link'])
-            post.save()
-            self.user.posts += ' ' + str(post.id)
+            if box['text'] != '':
+                post = Post.objects.create(
+                    owner_id=box['owner_id'],
+                    post_id=box['post_id'],
+                    text=box['text'],
+                    link=box['link'])
+                post.save()
+                self.user.posts += ' ' + str(post.id)
         self.user.save()
 
     def update_posts(self):
         vk_id = self.user.username
-        data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
-
+        # data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
+        data = get_posts(self.user, self.api)
         for i in data:
             post_id = i['id']
             try:
