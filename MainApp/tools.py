@@ -4,6 +4,13 @@ from .models import User, Post
 from django.core.exceptions import ObjectDoesNotExist
 
 
+def is_string_empty(s):
+    if s is None or len(s) == 0 or len(s.split()) == 0:
+        return True
+    else:
+        return False
+
+
 def get_content_from_post(post):
     if type(post) == list:
         post = post[0]
@@ -13,9 +20,8 @@ def get_content_from_post(post):
     link = 'http://vk.com/id' + owner_id + '?w=wall' + owner_id + '_' + post_id
     if 'copy_history' in post:
         box = get_content_from_post(post['copy_history'])
-        if box is not None:
-            if box['text'] != '':
-                text += ' ' + box['text']
+        if (box is not None) and (not is_string_empty(box['text'])):
+            text += ' ' + box['text']
     ret = {'owner_id': owner_id,
            'post_id': post_id,
            'link': link,
@@ -66,7 +72,7 @@ class Tool:
         data = get_posts(self.user, self.api)
         for i in data:
             box = get_content_from_post(i)
-            if box['text'] != '':
+            if not is_string_empty(box['text']):
                 post = Post.objects.create(
                     owner_id=box['owner_id'],
                     post_id=box['post_id'],
