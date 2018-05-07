@@ -18,8 +18,8 @@ class Tool:
         # self.user = User.objects.get(username=vk_id)
         # self.api = vk.API(vk.Session(access_token=self.user.access_token))
         self.user = User.objects.get(username=vk_id)
-        token = self.user.username
-        session = vk.Session(access_token=token)
+        access_token = self.user.access_token
+        session = vk.Session(access_token=access_token)
         self.api = vk.API(session)
 
     def get_img_url(self):
