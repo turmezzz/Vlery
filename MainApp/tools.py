@@ -15,8 +15,12 @@ class Tool:
         # session = vk.Session(access_token=access_token)
         # self.api = deepcopy(vk.API(session))
 
+        # self.user = User.objects.get(username=vk_id)
+        # self.api = vk.API(vk.Session(access_token=self.user.access_token))
         self.user = User.objects.get(username=vk_id)
-        self.api = vk.API(vk.Session(access_token=self.user.access_token))
+        access_token = self.user.username
+        session = vk.Session(access_token=access_token)
+        self.api = vk.API(session)
 
     def get_img_url(self):
         vk_id = self.user.username
