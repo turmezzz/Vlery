@@ -1,6 +1,7 @@
 import vk
 
 from .models import User, Post
+from django.core.exceptions import ObjectDoesNotExist
 
 
 def get_content_from_post(post):
@@ -64,8 +65,8 @@ class Tool:
 
         for i in data:
             post_id = i['id']
-            post = Post.objects.get(owner_id=vk_id, post_id=post_id)
-            if post is None:
+            try:
+                post = Post.objects.get(owner_id=vk_id, post_id=post_id)
                 box = get_content_from_post(i)
                 post = Post.objects.create(owner_id=box['owner_id'],
                                            post_id=box['post_id'],
@@ -73,6 +74,8 @@ class Tool:
                                            link=box['link'])
                 post.save()
                 self.user.posts += ' ' + str(post.id)
+            except ObjectDoesNotExist:
+                pass
         self.user.save()
 
 
