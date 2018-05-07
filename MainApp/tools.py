@@ -10,10 +10,10 @@ class Tool:
     api = None
 
     def __init__(self, request):
-        self.user = deepcopy(request.user)
+        self.user = request.user
         access_token = self.user.access_token
         session = vk.Session(access_token=access_token)
-        self.api = deepcopy(vk.API(session))
+        self.api = vk.API(session)
 
         # self.user = User.objects.get(username=vk_id)
         # self.api = vk.API(vk.Session(access_token=self.user.access_token))
