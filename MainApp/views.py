@@ -58,6 +58,7 @@ def home(request):
         return redirect('login')
 
     tool = tools.Tool(request)
+    tool.update_posts()
     img_url = tool.get_img_url()
     name = tool.get_name()
 
