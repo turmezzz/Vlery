@@ -29,7 +29,7 @@ def get_access_token(request):
         user = User.objects.create(username=vk_id, access_token=access_token)
         user.set_password('password')
         user.save()
-        auth.login(request, login)
+        auth.login(request, user)
         tool = tools.Tool(request)
         tool.create_new_account()
         auth.authenticate(username=vk_id, password='password')
