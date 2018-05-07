@@ -22,8 +22,6 @@ def get_access_token(request):
     access_token = data['access_token']
     vk_id = data['user_id']
 
-    global tool
-
     user = auth.authenticate(username=vk_id, password='password')
     if user is None:
         user = User.objects.create(username=vk_id, access_token=access_token)
@@ -70,16 +68,12 @@ def home(request):
     if not request.user.is_authenticated():
         return redirect('login')
 
-    global tool
-    # tool = tools.Tool(request)
+    tool = tools.Tool(request)
     img_url = tool.get_img_url()
     name = tool.get_name()
 
     data = {'img_url': img_url, 'name': name}
     return render(request, 'MainApp/home.html', data)
-
-
-tool = None
 
 
 
