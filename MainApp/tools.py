@@ -33,13 +33,13 @@ class Tool:
             owner_id = vk_id
             attachments = i['attachments']
             comments = i['comments']
-            id = i['id']
+            post_id = i['id']
             text = i['text']
-            link = 'http://vk.com/id' + owner_id + '?w=wall' + owner_id + '_' + id
+            link = 'http://vk.com/id' + owner_id + '?w=wall' + owner_id + '_' + post_id
             post = Post(owner_id=owner_id,
                         attachments=attachments,
                         comments=comments,
-                        id=id,
+                        post_id=post_id,
                         text=text,
                         link=link)
             post.save()

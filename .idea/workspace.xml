@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09a6877f-5be6-4336-ace8-e94870f37b85" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/MainApp/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/admin.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApp/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApp/templates/MainApp/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/templates/MainApp/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApp/templates/MainApp/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/templates/MainApp/output.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApp/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/tools.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -70,7 +66,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MainApp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1680">
+            <state relative-caret-position="1123">
               <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -79,11 +75,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tools.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="tools.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MainApp/tools.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
+            <state relative-caret-position="435">
+              <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -103,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MainApp/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+            <state relative-caret-position="384">
+              <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -142,10 +138,10 @@
         <option value="$PROJECT_DIR$/MainApp/forms.py" />
         <option value="$PROJECT_DIR$/Vlery/settings.py" />
         <option value="$PROJECT_DIR$/MainApp/urls.py" />
-        <option value="$PROJECT_DIR$/MainApp/models.py" />
-        <option value="$PROJECT_DIR$/MainApp/tools.py" />
         <option value="$PROJECT_DIR$/MainApp/admin.py" />
         <option value="$PROJECT_DIR$/MainApp/views.py" />
+        <option value="$PROJECT_DIR$/MainApp/models.py" />
+        <option value="$PROJECT_DIR$/MainApp/tools.py" />
       </list>
     </option>
   </component>
@@ -426,20 +422,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MainApp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1680">
+        <state relative-caret-position="1123">
           <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MainApp/tools.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="45" column="38" lean-forward="true" selection-start-line="45" selection-start-column="38" selection-end-line="45" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -456,10 +442,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MainApp/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="8" column="18" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        <state relative-caret-position="384">
+          <caret line="16" column="25" lean-forward="true" selection-start-line="16" selection-start-column="25" selection-end-line="16" selection-end-column="25" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MainApp/tools.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="39" column="12" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
