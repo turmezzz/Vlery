@@ -55,7 +55,8 @@ def home(request):
 
     # return HttpResponse(request.user.access_token)
 
-    tool = tools.Tool(request.user.username)
+    # tool = tools.Tool(request.user.username)
+    tool = tools.Tool(request)
     img_url = tool.get_img_url()
     name = tool.get_name()
 
