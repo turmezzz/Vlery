@@ -55,8 +55,8 @@ class Tool:
                 # comments=comments,
                 post_id=box['post_id'],
                 text=box['text'],
-                # link=box['link'])
-                link='')
+                link=box['link'])
+                # link='')
             post.save()
             self.user.posts += ' ' + str(post.id)
         self.user.save()

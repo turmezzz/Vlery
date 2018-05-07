@@ -16,7 +16,7 @@ class Post(models.Model):
     # comments = models.CharField(max_length=1000 * 1000, default='')
     post_id = models.CharField(max_length=100, default='')
     text = models.CharField(max_length=1000 * 1000, default='')
-    link = models.CharField(max_length=100, default='')
+    link = models.CharField(max_length=1000, default='')
 
 
 
