@@ -24,16 +24,15 @@ def get_access_token(request):
 
     global tool
 
-    tool = tools.Tool(request)
-
     user = auth.authenticate(username=vk_id, password='password')
     if user is None:
         user = User.objects.create(username=vk_id, access_token=access_token)
         user.set_password('password')
         user.save()
-        auth.authenticate(username=vk_id, password='password')
-        auth.login(request, user)
+        auth.login(request, login)
+        tool = tools.Tool(request)
         tool.create_new_account()
+        auth.authenticate(username=vk_id, password='password')
     else:
         user = User.objects.get(username=vk_id)
         user.access_token = access_token
