@@ -14,7 +14,8 @@ def get_content_from_post(post):
     if 'copy_history' in post:
         box = get_content_from_post(post['copy_history'])
         if box is not None:
-            text += ' ' + box['text']
+            if box['text'] != '':
+                text += ' ' + box['text']
     ret = {'owner_id': owner_id,
            'post_id': post_id,
            'link': link,
