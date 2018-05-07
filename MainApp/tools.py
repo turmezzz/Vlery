@@ -44,7 +44,7 @@ class Tool:
                 text=text,
                 link=link)
             post.save()
-            self.user += ' ' + str(post.id)
+            self.user.posts += ' ' + str(post.id)
         self.user.save()
 
 
