@@ -67,9 +67,24 @@ class Tool:
         ret = data[0]['first_name']
         return ret
 
+    def get_posts(self):
+        vk_id = self.user.username
+        post_count = self.api.wall.get(owner_id=vk_id, count=1, v=5.74)['count']
+        data = []
+        offset = 0
+        for i in range(post_count // 100):
+            box = self.api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
+            offset += 100
+            data += box
+        post_count %= 100
+        if post_count != 0:
+            box = self.api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
+            data += box
+        return data
+
     def create_new_account(self):
         # data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
-        data = get_posts(self.user, self.api)
+        data = get_posts()
         for i in data:
             box = get_content_from_post(i)
             if not is_string_empty(box['text']):
@@ -85,19 +100,20 @@ class Tool:
     def update_posts(self):
         vk_id = self.user.username
         # data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
-        data = get_posts(self.user, self.api)
+        data = get_posts()
         for i in data:
             post_id = i['id']
             try:
                 Post.objects.get(owner_id=vk_id, post_id=post_id)
             except ObjectDoesNotExist:
                 box = get_content_from_post(i)
-                post = Post.objects.create(owner_id=box['owner_id'],
-                                           post_id=box['post_id'],
-                                           text=box['text'],
-                                           link=box['link'])
-                post.save()
-                self.user.posts += ' ' + str(post.id)
+                if not is_string_empty(box['text']):
+                    post = Post.objects.create(owner_id=box['owner_id'],
+                                               post_id=box['post_id'],
+                                               text=box['text'],
+                                               link=box['link'])
+                    post.save()
+                    self.user.posts += ' ' + str(post.id)
         self.user.save()
 
 
