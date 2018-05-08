@@ -79,6 +79,7 @@ def search(request):
         img_url = tool.get_img_url()
         data = {'queue': q, 'img_url': img_url, 'posts': posts}
         return render(request, 'MainApp/output.html', data)
+    return HttpResponse('fuck u')
 
 
 
