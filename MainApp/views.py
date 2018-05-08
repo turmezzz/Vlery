@@ -23,7 +23,7 @@ def get_access_token(request):
     vk_id = data['user_id']
 
     user = auth.authenticate(username=vk_id, password='password')
-    if user.is_anonymous() or user is None:
+    if user is None or user.is_anonymous():
         user = User.objects.create(username=vk_id, access_token=access_token)
         user.set_password('password')
         user.save()
