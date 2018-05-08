@@ -7,4 +7,5 @@ urlpatterns = [
     url(r'^get_access_token', views.get_access_token, name='get_access_token'),
     url(r'^home', views.home, name='home'),
     url(r'^search', views.search, name='search'),
+
 ]
