@@ -66,6 +66,24 @@ def home(request):
     return render(request, 'MainApp/home.html', data)
 
 
+def search(request):
+    if not request.user.is_authenticated():
+        return redirect('login')
+
+    # Здесь не происходит обновления постов
+
+    if request.method == 'POST':
+        q = request.POST['q']
+        tool = tools.Tool(request)
+        posts = tools.search(request.user, q)
+        img_url = tool.get_img_url()
+        data = {'queue': q, 'img_url': img_url, 'posts': posts}
+        return render(request, 'MainApp/output.html', data)
+
+
+
+
+
 
 
 
