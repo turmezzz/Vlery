@@ -15,7 +15,7 @@ def get_content_from_post(post):
     if type(post) == list:
         post = post[0]
     owner_id = str(post['owner_id'])
-    text = post['text'].lower()
+    text = post['text']
     post_id = str(post['id'])
     link = 'http://vk.com/id' + owner_id + '?w=wall' + owner_id + '_' + post_id
     if 'copy_history' in post:
@@ -29,20 +29,19 @@ def get_content_from_post(post):
     return ret
 
 
-# def get_posts(user, api):
-#     vk_id = user.username
-#     post_count = api.wall.get(owner_id=vk_id, count=1, v=5.74)['count']
-#     data = []
-#     offset = 0
-#     for i in range(post_count // 100):
-#         box = api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
-#         offset += 100
-#         data += box
-#     post_count %= 100
-#     if post_count != 0:
-#         box = api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
-#         data += box
-#     return data
+def text_normalization(text):
+
+    accepted_letters = {'a': 0, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1, 'g': 1, 'h': 1, 'i': 1, 'j': 1, 'k': 1, 'l': 1, 'm': 1, 'n': 1, 'o': 0, 'p': 1, 'q': 1, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 1, 'w': 1, 'x': 1, 'y': 1, 'z': 1, 'а': 0, 'б': 1, 'в': 1, 'г': 1, 'д': 1, 'е': 0, 'ж': 1, 'з': 1, 'и': 0, 'й': 1, 'к': 1, 'л': 1, 'м': 1, 'н': 1, 'о': 0, 'п': 1, 'р': 1, 'с': 1, 'т': 1, 'у': 0, 'ф': 1, 'х': 1, 'ц': 1, 'ч': 1, 'ш': 1, 'щ': 1, 'ъ': 1, 'ы': 0, 'ь': 1, 'э': 1, 'ю': 0, 'я': 0}
+
+    text = text.lower()
+    words = []
+    for word in text.split():
+        box = ''
+        for i in word:
+            if i in accepted_letters and accepted_letters[i] == 1:
+                box += i
+        words.append(box)
+    return ' '.join(words)
 
 
 class Tool:
@@ -83,10 +82,10 @@ class Tool:
         return data
 
     def create_new_account(self):
-        # data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
         data = self.get_posts()
         for i in data:
             box = get_content_from_post(i)
+            box['text'] = text_normalization(box['text'])
             if not is_string_empty(box['text']):
                 post = Post.objects.create(
                     owner_id=box['owner_id'],
@@ -99,7 +98,6 @@ class Tool:
 
     def update_posts(self):
         vk_id = self.user.username
-        # data = self.api.wall.get(owner_id=vk_id, v=5.74)['items']
         data = self.get_posts()
         for i in data:
             post_id = i['id']
@@ -107,6 +105,7 @@ class Tool:
                 Post.objects.get(owner_id=vk_id, post_id=post_id)
             except ObjectDoesNotExist:
                 box = get_content_from_post(i)
+                box['text'] = text_normalization(box['text'])
                 if not is_string_empty(box['text']):
                     post = Post.objects.create(owner_id=box['owner_id'],
                                                post_id=box['post_id'],
