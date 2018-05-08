@@ -35,9 +35,9 @@ def get_access_token(request):
         user = User.objects.get(username=vk_id)
         user.access_token = access_token
         user.save()
+        auth.login(request, user)
         tool = tools.Tool(request)
         tool.update_posts()
-        auth.login(request, user)
     return redirect('home')
 
 
