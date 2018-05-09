@@ -72,14 +72,21 @@ def search(request):
 
     # Здесь не происходит обновления постов
 
-    if request.method == 'POST':
-        q = request.POST['q']
-        tool = tools.Tool(request)
-        posts = tools.search(request.user, q)
-        img_url = tool.get_img_url()
-        data = {'queue': q, 'img_url': img_url, 'posts': posts}
-        return render(request, 'MainApp/output.html', data)
-    return HttpResponse('fuck u')
+    # if request.method == 'POST':
+    #     q = request.POST['q']
+    #     tool = tools.Tool(request)
+    #     posts = tools.search(request.user, q)
+    #     img_url = tool.get_img_url()
+    #     data = {'queue': q, 'img_url': img_url, 'posts': posts}
+    #     return render(request, 'MainApp/output.html', data)
+    # return HttpResponse('fuck u')
+
+    q = request.POST['q']
+    tool = tools.Tool(request)
+    posts = tools.search(request.user, q)
+    img_url = tool.get_img_url()
+    data = {'queue': q, 'img_url': img_url, 'posts': posts}
+    return render(request, 'MainApp/output.html', data)
 
 
 
