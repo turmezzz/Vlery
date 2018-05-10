@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09a6877f-5be6-4336-ace8-e94870f37b85" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/MainApp/static/css/home_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/static/css/home_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainApp/static/css/output_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/static/css/output_style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApp/templates/MainApp/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/templates/MainApp/output.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MainApp/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -66,7 +67,7 @@
       <file leaf-file-name="views.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MainApp/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="558">
+            <state relative-caret-position="546">
               <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -515,7 +516,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/MainApp/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="558">
+        <state relative-caret-position="546">
           <caret line="79" column="30" lean-forward="true" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
