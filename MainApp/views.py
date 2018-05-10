@@ -77,7 +77,8 @@ def search(request):
         tool = tools.Tool(request)
         posts = tools.search(request.user, q)
         img_url = tool.get_img_url()
-        data = {'queue': q, 'img_url': img_url, 'posts': posts}
+        name = tool.get_name()
+        data = {'queue': q, 'img_url': img_url, 'name': name, 'posts': posts}
         return render(request, 'MainApp/output.html', data)
     return HttpResponse('fuck u')
 
