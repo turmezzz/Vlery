@@ -29,22 +29,43 @@ def get_content_from_post(post):
     return ret
 
 
-def text_normalization(text):
+# def text_normalization(text):
+#     accepted_letters = {'a': 0, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1, 'g': 1, 'h': 1, 'i': 1, 'j': 1, 'k': 1, 'l': 1,
+#                         'm': 1, 'n': 1, 'o': 0, 'p': 1, 'q': 1, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 1, 'w': 1, 'x': 1,
+#                         'y': 1, 'z': 1, 'а': 0, 'б': 1, 'в': 1, 'г': 1, 'д': 1, 'е': 0, 'ж': 1, 'з': 1, 'и': 0, 'й': 1,
+#                         'к': 1, 'л': 1, 'м': 1, 'н': 1, 'о': 0, 'п': 1, 'р': 1, 'с': 1, 'т': 1, 'у': 0, 'ф': 1, 'х': 1,
+#                         'ц': 1, 'ч': 1, 'ш': 1, 'щ': 1, 'ъ': 1, 'ы': 0, 'ь': 1, 'э': 1, 'ю': 0, 'я': 0}
+#
+#     text = text.lower()
+#     words = []
+#     for word in text.split():
+#         box = ''
+#         for i in word:
+#             if i in accepted_letters and accepted_letters[i] == 1:
+#                 box += i
+#         words.append(box)
+#     return ' '.join(words)
+
+def text_normalization(q):
     accepted_letters = {'a': 0, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1, 'g': 1, 'h': 1, 'i': 1, 'j': 1, 'k': 1, 'l': 1,
                         'm': 1, 'n': 1, 'o': 0, 'p': 1, 'q': 1, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 1, 'w': 1, 'x': 1,
                         'y': 1, 'z': 1, 'а': 0, 'б': 1, 'в': 1, 'г': 1, 'д': 1, 'е': 0, 'ж': 1, 'з': 1, 'и': 0, 'й': 1,
                         'к': 1, 'л': 1, 'м': 1, 'н': 1, 'о': 0, 'п': 1, 'р': 1, 'с': 1, 'т': 1, 'у': 0, 'ф': 1, 'х': 1,
                         'ц': 1, 'ч': 1, 'ш': 1, 'щ': 1, 'ъ': 1, 'ы': 0, 'ь': 1, 'э': 1, 'ю': 0, 'я': 0}
 
-    text = text.lower()
-    words = []
-    for word in text.split():
+    q_words = q.lower().split()
+    data = []
+    for word in q_words:
         box = ''
-        for i in word:
-            if i in accepted_letters and accepted_letters[i] == 1:
-                box += i
-        words.append(box)
-    return ' '.join(words)
+        flag = False
+        for i in range(len(word) - 1, -1, -1):
+            if word[i] in accepted_letters:
+                if accepted_letters[word[i]] == 1 or flag:
+                    flag = True
+                    box += word[i]
+        box = box[::-1]
+        data.append(box)
+    return ' '.join(data)
 
 
 def search(user, q):
