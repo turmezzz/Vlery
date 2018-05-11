@@ -72,6 +72,15 @@ def search(request):
 
     # Здесь не происходит обновления постов
 
+    #
+        posts = tools.search(request.user, q)
+        ret = ''
+        for i in posts:
+            ret += i.text
+            ret += '\n'
+        return HttpResponse(ret)
+    #
+
     if request.method == 'GET':
         q = request.GET['q']
         tool = tools.Tool(request)

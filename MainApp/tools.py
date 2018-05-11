@@ -119,15 +119,20 @@ def queue_normalization(q):
 
 
 def search(user, q):
-    # первый способ поиска
     owner_id = user.username
     # q = text_normalization(q)
     q = queue_normalization(q)
     q_words = q.split()
+    #
+    ret = []
+    for word in q_words:
+        posts = Post.objects.filter(owner_id__exact=owner_id, text__contains=word)
+        ret += posts
+    return ret
+    #
     data = {}
     for word in q_words:
         posts = Post.objects.filter(owner_id__exact=owner_id, text__contains=word)
-        # posts = Post.objects.filter(owner_id__exact=owner_id, text__exact=word)
         for post in posts:
             if post not in data:
                 data[post] = 0
