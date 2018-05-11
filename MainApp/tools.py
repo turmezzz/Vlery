@@ -48,7 +48,7 @@ def text_normalization(q):
                     box += word[i]
             elif len(box) > 0 and box[-1] != ' ':
                 box += ' '
-        if flag and box != ' ':
+        if flag and len(box) > 2:
             box = box[::-1]
             data.append(box)
     return ' '.join(data)
@@ -120,12 +120,11 @@ def queue_normalization(q):
 
 def search(user, q):
     owner_id = user.username
-    # q = text_normalization(q)
     q = queue_normalization(q)
     q_words = q.split()
     data = {}
     for word in q_words:
-        posts = Post.objects.filter(owner_id__exact=owner_id, text__contains=(' ' + word + ' '))
+        posts = Post.objects.filter(owner_id__exact=owner_id, text__contains=word)
         for post in posts:
             if post not in data:
                 data[post] = 0
