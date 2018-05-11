@@ -123,13 +123,6 @@ def search(user, q):
     # q = text_normalization(q)
     q = queue_normalization(q)
     q_words = q.split()
-    #
-    ret = []
-    for word in q_words:
-        posts = Post.objects.filter(owner_id__exact=owner_id, text__contains=word)
-        ret += posts
-    return ret
-    #
     data = {}
     for word in q_words:
         posts = Post.objects.filter(owner_id__exact=owner_id, text__contains=word)
