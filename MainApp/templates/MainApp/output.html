@@ -24,14 +24,13 @@
     		</div>
     	</div>
     	<div class="output">
-    		<!-- {% for post in posts %} -->
-    		{% for i in range(len(posts)) %}
+    		{% for post in posts %}
 	    		<div class="post">
-	    			<a href="{{ posts[i].link }}">
+	    			<a href="{{ post.link }}">
 	    				перейти к оригиналу
 	    			</a>
 	    			<hr>
-	    			<p> {{ i }} </p>
+	    			<p> {{ post.i }} </p>
 	    			<!-- <p class="txt">
 	    				{{ post.txt }}
 	    			</p> -->
