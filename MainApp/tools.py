@@ -29,16 +29,22 @@ def get_content_from_post(post):
     return ret
 
 
-def text_normalization(q):
-    accepted_letters = {'a': 0, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1, 'g': 1, 'h': 1, 'i': 1, 'j': 1, 'k': 1, 'l': 1,
-                        'm': 1, 'n': 1, 'o': 0, 'p': 1, 'q': 1, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 1, 'w': 1, 'x': 1,
-                        'y': 1, 'z': 1, 'а': 0, 'б': 1, 'в': 1, 'г': 1, 'д': 1, 'е': 0, 'ж': 1, 'з': 1, 'и': 0, 'й': 0,
-                        'к': 1, 'л': 1, 'м': 1, 'н': 1, 'о': 0, 'п': 1, 'р': 1, 'с': 1, 'т': 1, 'у': 0, 'ф': 1, 'х': 1,
-                        'ц': 1, 'ч': 1, 'ш': 1, 'щ': 1, 'ъ': 1, 'ы': 0, 'ь': 1, 'э': 1, 'ю': 0, 'я': 0, ' ': 0}
+def smart_split(q):
+    q.lower()
+    box = ''
+    for i in q:
+        if ('a' <= i and i <= 'z') or ('а' <= i and i <= 'я'):
+            box += i
+        elif box != '' and box[-1] != ' ':
+            box += ' '
+    return box
 
-    q_words = q.lower().split()
+
+def text_normalization(text):
+    accepted_letters = {'a': 0, 'b': 1, 'c': 1, 'd': 1, 'e': 1, 'f': 1, 'g': 1, 'h': 1, 'i': 1, 'j': 1, 'k': 1, 'l': 1, 'm': 1, 'n': 1, 'o': 0, 'p': 1, 'q': 1, 'r': 1, 's': 1, 't': 1, 'u': 1, 'v': 1, 'w': 1, 'x': 1, 'y': 1, 'z': 1, 'а': 0, 'б': 1, 'в': 1, 'г': 1, 'д': 1, 'е': 0, 'ж': 1, 'з': 1, 'и': 0, 'й': 0, 'к': 1, 'л': 1, 'м': 1, 'н': 1, 'о': 0, 'п': 1, 'р': 1, 'с': 1, 'т': 1, 'у': 0, 'ф': 1, 'х': 1, 'ц': 1, 'ч': 1, 'ш': 1, 'щ': 1, 'ъ': 1, 'ы': 0, 'ь': 1, 'э': 1, 'ю': 0, 'я': 0, ' ': 0}
+    text = smart_split(text.lower())
     data = []
-    for word in q_words:
+    for word in text.split():
         box = ''
         flag = False
         for i in range(len(word) - 1, -1, -1):
@@ -48,73 +54,63 @@ def text_normalization(q):
                     box += word[i]
             elif len(box) > 0 and box[-1] != ' ':
                 box += ' '
-        if flag and len(box) > 2:
+        if flag and len(box) >= 2:
             box = box[::-1]
             data.append(box)
+        elif len(word) > 3:
+            data.append(word)
     return ' '.join(data)
 
 
 def queue_normalization(q):
-    q = q.lower()
-    ret = q
-    rus_to_eng_translit = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'j',
-     'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'y', 'ф': 'f',
-     'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh', 'щ': 'sh', 'ы': 'i', 'э': 'e', 'ю': 'u', 'я': 'ya', ' ': ' ', 'ь': '', 'ъ': ''}
-    eng_to_rus_translit = {'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д', 'e': 'е', 'z': 'з', 'i': 'и', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п', 'r': 'р', 's': 'с', 't': 'т', 'y': 'у', 'f': 'ф', 'h': 'х', 'c': 'ц', 'u': 'ю', ' ': ' ', 'j': 'й'}
+    def need_space(s):
+        if s == '' or s[-1] == ' ':
+            return False
+        return True
+    rus_to_eng_translit = {'а': 'a', 'б': 'b', 'в': 'v', 'г': 'g', 'д': 'd', 'е': 'e', 'ё': 'e', 'ж': 'zh', 'з': 'z', 'и': 'i', 'й': 'j', 'к': 'k', 'л': 'l', 'м': 'm', 'н': 'n', 'о': 'o', 'п': 'p', 'р': 'r', 'с': 's', 'т': 't', 'у': 'y', 'ф': 'f', 'х': 'h', 'ц': 'c', 'ч': 'ch', 'ш': 'sh', 'щ': 'sh', 'ы': 'i', 'э': 'e', 'ю': 'u', 'я': 'ya', 'ь': '', 'ъ': ''}
+    eng_to_rus_translit = {'a': 'а', 'b': 'б', 'v': 'в', 'g': 'г', 'd': 'д', 'e': 'е', 'z': 'з', 'i': 'и', 'k': 'к', 'l': 'л', 'm': 'м', 'n': 'н', 'o': 'о', 'p': 'п', 'r': 'р', 's': 'с', 't': 'т', 'y': 'у', 'f': 'ф', 'h': 'х', 'c': 'ц', 'u': 'ю', 'j': 'й'}
     rus_to_eng_keybord_loyaut = {'а': 'f', 'б': ',', 'в': 'd', 'г': 'u', 'д': 'l', 'е': 't', 'ж': ';', 'з': 'p', 'и': 'b', 'й': 'q', 'к': 'r', 'л': 'k', 'м': 'v', 'н': 'y', 'о': 'j', 'п': 'g', 'р': 'h', 'с': 'c', 'т': 'n', 'у': 'e', 'ф': 'a', 'х': '', 'ц': 'w', 'ч': 'x', 'ш': 'i', 'щ': 'o', 'ъ': '', 'ы': 's', 'ь': '', 'э': '', 'ю': '', 'я': 'z'}
     eng_to_rus_keybord_loyaut = {'f': 'а', 'd': 'в', 'u': 'г', 'l': 'д', 't': 'е', 'p': 'з', 'b': 'и', 'q': 'й', 'r': 'к', 'k': 'л', 'v': 'м', 'y': 'н', 'j': 'о', 'g': 'п', 'h': 'р', 'c': 'с', 'n': 'т', 'e': 'у', 'a': 'ф', 'w': 'ц', 'x': 'ч', 'i': 'ш', 'o': 'щ', 's': 'ы', 'z': 'я'}
+    q = smart_split(q.lower())
 
-    # раскладка с русского на английский
-    box = ''
+    box_rus_to_eng_translit = ''
+    box_eng_to_rus_translit = ''
+    box_rus_to_eng_keybord_loyaut = ''
+    box_eng_to_rus_keybord_loyaut = ''
     for i in q:
+        # транслит с русского на английский
+        if i in rus_to_eng_translit:
+            box_rus_to_eng_translit += rus_to_eng_translit[i]
+        elif i == ' ' and need_space(box_rus_to_eng_translit):
+            box_rus_to_eng_translit += ' '
+
+        # транслит с английского на русский
+        if i in eng_to_rus_translit:
+            box_eng_to_rus_translit += eng_to_rus_translit[i]
+        elif i == ' ' and need_space(box_eng_to_rus_translit):
+            box_eng_to_rus_translit += ' '
+
+        # раскладка с русского на английский
         if i in rus_to_eng_keybord_loyaut:
-            box += rus_to_eng_keybord_loyaut[i]
-        elif i == ' ':
-            box += ' '
-    ret += ' ' + box
+            box_rus_to_eng_keybord_loyaut += rus_to_eng_keybord_loyaut[i]
+        elif i == ' ' and need_space(box_rus_to_eng_keybord_loyaut):
+            box_rus_to_eng_keybord_loyaut += ' '
 
-    # раскладка с английского на русский
-    box = ''
-    for i in q:
+        # раскладка с английского на русский
         if i in eng_to_rus_keybord_loyaut:
-            box += eng_to_rus_keybord_loyaut[i]
-        elif i == ' ':
-            box += ' '
-    ret += ' ' + box
+            box_eng_to_rus_keybord_loyaut += eng_to_rus_keybord_loyaut[i]
+        elif i == ' ' and need_space(box_eng_to_rus_keybord_loyaut):
+            box_eng_to_rus_keybord_loyaut += ' '
 
-    ret = text_normalization(ret)
-
-    # транслит с русского на английский
-    line = ''
-    box = ''
-    try:
-        for word in q.split():
-            box = ' '
-            for i in word:
-                box += rus_to_eng_translit[i]
-            if box != ' ':
-                line += box
-    except KeyError:
-        pass
-    box = text_normalization(line)
-    if box:
-        ret += ' ' + box
-
-    # транслит с английского на русский
-    line = ''
-    box = ''
-    try:
-        for word in q.split():
-            box = ' '
-            for i in word:
-                box += eng_to_rus_translit[i]
-            if box != ' ':
-                line += box
-    except KeyError:
-        pass
-    box = text_normalization(line)
-    if box:
-        ret += ' ' + box
+    ret = text_normalization(q)
+    if box_rus_to_eng_translit:
+        ret += ' ' + text_normalization(box_rus_to_eng_translit)
+    if box_eng_to_rus_translit:
+        ret += ' ' + text_normalization(box_eng_to_rus_translit)
+    if box_rus_to_eng_keybord_loyaut:
+        ret += ' ' + text_normalization(box_rus_to_eng_keybord_loyaut)
+    if box_eng_to_rus_keybord_loyaut:
+        ret += ' ' + text_normalization(box_eng_to_rus_keybord_loyaut)
     return ret
 
 
