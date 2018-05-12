@@ -130,6 +130,7 @@ def search(user, q):
     for i in data:
         box.append([data[i], i])
     box.sort(key=lambda x: x[0])
+    box = box[::-1]
     return [i[1] for i in box]
 
 
