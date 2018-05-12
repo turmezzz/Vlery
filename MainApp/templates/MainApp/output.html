@@ -24,15 +24,17 @@
     		</div>
     	</div>
     	<div class="output">
-    		{% for post in posts %}
+    		<!-- {% for post in posts %} -->
+    		{% for i in range(len(posts)) %}
 	    		<div class="post">
-	    			<a href="{{ post.link }}">
+	    			<a href="{{ posts[i].link }}">
 	    				перейти к оригиналу
 	    			</a>
 	    			<hr>
-	    			<p class="txt">
+	    			<p> {{ i }} </p>
+	    			<!-- <p class="txt">
 	    				{{ post.txt }}
-	    			</p>
+	    			</p> -->
 	    			<!-- {% for img in post.imgs %}
 	    				<img src="img.link">
 	    			{% endfor %} -->
