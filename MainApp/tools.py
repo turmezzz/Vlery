@@ -174,12 +174,13 @@ class Tool:
         data = self.get_posts()
         for i in data:
             box = get_content_from_post(i)
-            box['text'] = text_normalization(box['text'])
+            box['tags'] = text_normalization(box['text'])
             if not is_string_empty(box['text']):
                 post = Post.objects.create(
                     owner_id=box['owner_id'],
                     post_id=box['post_id'],
                     text=box['text'],
+                    tags=box['tags'],
                     link=box['link'])
                 post.save()
                 self.user.posts += ' ' + str(post.id)
@@ -194,11 +195,12 @@ class Tool:
                 Post.objects.get(owner_id=vk_id, post_id=post_id)
             except ObjectDoesNotExist:
                 box = get_content_from_post(i)
-                box['text'] = text_normalization(box['text'])
+                box['tags'] = text_normalization(box['text'])
                 if not is_string_empty(box['text']):
                     post = Post.objects.create(owner_id=box['owner_id'],
                                                post_id=box['post_id'],
                                                text=box['text'],
+                                               tags=box['tags'],
                                                link=box['link'])
                     post.save()
                     self.user.posts += ' ' + str(post.id)
