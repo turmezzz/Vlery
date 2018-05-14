@@ -11,6 +11,14 @@ def is_string_empty(s):
         return False
 
 
+def get_content_from_comments(data):
+    comments = data['items']
+    ret = ''
+    for comment in comments:
+        ret += ' ' + comment['text']
+    return ret
+
+
 def get_content_from_post(post):
     if type(post) == list:
         post = post[0]
@@ -19,9 +27,9 @@ def get_content_from_post(post):
     post_id = str(post['id'])
     link = 'http://vk.com/id' + owner_id + '?w=wall' + owner_id + '_' + post_id
     if 'copy_history' in post:
-        box = get_content_from_post(post['copy_history'])
-        if (box is not None) and (not is_string_empty(box['text'])):
-            text += ' ' + box['text']
+        post = get_content_from_post(post['copy_history'])
+        if (post is not None) and (not is_string_empty(post['text'])):
+            text += ' ' + post['text']
     ret = {'owner_id': owner_id,
            'post_id': post_id,
            'link': link,
@@ -31,13 +39,13 @@ def get_content_from_post(post):
 
 def smart_split(q):
     q.lower()
-    box = ''
+    post = ''
     for i in q:
         if ('a' <= i and i <= 'z') or ('а' <= i and i <= 'я'):
-            box += i
-        elif box != '' and box[-1] != ' ':
-            box += ' '
-    return box
+            post += i
+        elif post != '' and post[-1] != ' ':
+            post += ' '
+    return post
 
 
 def text_normalization(text):
@@ -45,18 +53,18 @@ def text_normalization(text):
     text = smart_split(text.lower())
     data = []
     for word in text.split():
-        box = ''
+        post = ''
         flag = False
         for i in range(len(word) - 1, -1, -1):
             if word[i] in accepted_letters:
                 if accepted_letters[word[i]] == 1 or flag:
                     flag = True
-                    box += word[i]
-            elif len(box) > 0 and box[-1] != ' ':
-                box += ' '
-        if flag and len(box) >= 2:
-            box = box[::-1]
-            data.append(box)
+                    post += word[i]
+            elif len(post) > 0 and post[-1] != ' ':
+                post += ' '
+        if flag and len(post) >= 2:
+            post = post[::-1]
+            data.append(post)
         elif len(word) > 3:
             data.append(word)
     return ' '.join(data)
@@ -73,44 +81,44 @@ def queue_normalization(q):
     eng_to_rus_keybord_loyaut = {'f': 'а', 'd': 'в', 'u': 'г', 'l': 'д', 't': 'е', 'p': 'з', 'b': 'и', 'q': 'й', 'r': 'к', 'k': 'л', 'v': 'м', 'y': 'н', 'j': 'о', 'g': 'п', 'h': 'р', 'c': 'с', 'n': 'т', 'e': 'у', 'a': 'ф', 'w': 'ц', 'x': 'ч', 'i': 'ш', 'o': 'щ', 's': 'ы', 'z': 'я'}
     q = smart_split(q.lower())
 
-    box_rus_to_eng_translit = ''
-    box_eng_to_rus_translit = ''
-    box_rus_to_eng_keybord_loyaut = ''
-    box_eng_to_rus_keybord_loyaut = ''
+    post_rus_to_eng_translit = ''
+    post_eng_to_rus_translit = ''
+    post_rus_to_eng_keybord_loyaut = ''
+    post_eng_to_rus_keybord_loyaut = ''
     for i in q:
         # транслит с русского на английский
         if i in rus_to_eng_translit:
-            box_rus_to_eng_translit += rus_to_eng_translit[i]
-        elif i == ' ' and need_space(box_rus_to_eng_translit):
-            box_rus_to_eng_translit += ' '
+            post_rus_to_eng_translit += rus_to_eng_translit[i]
+        elif i == ' ' and need_space(post_rus_to_eng_translit):
+            post_rus_to_eng_translit += ' '
 
         # транслит с английского на русский
         if i in eng_to_rus_translit:
-            box_eng_to_rus_translit += eng_to_rus_translit[i]
-        elif i == ' ' and need_space(box_eng_to_rus_translit):
-            box_eng_to_rus_translit += ' '
+            post_eng_to_rus_translit += eng_to_rus_translit[i]
+        elif i == ' ' and need_space(post_eng_to_rus_translit):
+            post_eng_to_rus_translit += ' '
 
         # раскладка с русского на английский
         if i in rus_to_eng_keybord_loyaut:
-            box_rus_to_eng_keybord_loyaut += rus_to_eng_keybord_loyaut[i]
-        elif i == ' ' and need_space(box_rus_to_eng_keybord_loyaut):
-            box_rus_to_eng_keybord_loyaut += ' '
+            post_rus_to_eng_keybord_loyaut += rus_to_eng_keybord_loyaut[i]
+        elif i == ' ' and need_space(post_rus_to_eng_keybord_loyaut):
+            post_rus_to_eng_keybord_loyaut += ' '
 
         # раскладка с английского на русский
         if i in eng_to_rus_keybord_loyaut:
-            box_eng_to_rus_keybord_loyaut += eng_to_rus_keybord_loyaut[i]
-        elif i == ' ' and need_space(box_eng_to_rus_keybord_loyaut):
-            box_eng_to_rus_keybord_loyaut += ' '
+            post_eng_to_rus_keybord_loyaut += eng_to_rus_keybord_loyaut[i]
+        elif i == ' ' and need_space(post_eng_to_rus_keybord_loyaut):
+            post_eng_to_rus_keybord_loyaut += ' '
 
     ret = text_normalization(q)
-    if box_rus_to_eng_translit:
-        ret += ' ' + text_normalization(box_rus_to_eng_translit)
-    if box_eng_to_rus_translit:
-        ret += ' ' + text_normalization(box_eng_to_rus_translit)
-    if box_rus_to_eng_keybord_loyaut:
-        ret += ' ' + text_normalization(box_rus_to_eng_keybord_loyaut)
-    if box_eng_to_rus_keybord_loyaut:
-        ret += ' ' + text_normalization(box_eng_to_rus_keybord_loyaut)
+    if post_rus_to_eng_translit:
+        ret += ' ' + text_normalization(post_rus_to_eng_translit)
+    if post_eng_to_rus_translit:
+        ret += ' ' + text_normalization(post_eng_to_rus_translit)
+    if post_rus_to_eng_keybord_loyaut:
+        ret += ' ' + text_normalization(post_rus_to_eng_keybord_loyaut)
+    if post_eng_to_rus_keybord_loyaut:
+        ret += ' ' + text_normalization(post_eng_to_rus_keybord_loyaut)
     return ret
 
 
@@ -120,17 +128,16 @@ def search(user, q):
     q_words = q.split()
     data = {}
     for word in q_words:
-        posts = Post.objects.filter(owner_id__exact=owner_id, tags__contains=word)
+        posts = Post.objects.filter(owner_id__exact=owner_id, tags__contains=word, comments__contains=word)
         for post in posts:
             if post not in data:
                 data[post] = 0
             data[post] += 1
-
-    box = []
+    post = []
     for i in data:
-        box.append([data[i], i])
-    box.sort(key=lambda x: x[0])
-    return [i[1] for i in box]
+        post.append([data[i], i])
+    post.sort(key=lambda x: x[0])
+    return [i[1] for i in post]
 
 
 class Tool:
@@ -161,27 +168,47 @@ class Tool:
         data = []
         offset = 0
         for i in range(post_count // 100):
-            box = self.api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
+            post = self.api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
             offset += 100
-            data += box
+            data += post
         post_count %= 100
         if post_count != 0:
-            box = self.api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
-            data += box
+            post = self.api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
+            data += post
+        return data
+
+    def get_comments(self, post):
+        owner_id = str(post['owner_id'])
+        post_id = str(post['id'])
+        comments_count = post['comments']['count']
+        data = []
+        offset = 0
+        for i in range(comments_count // 100):
+            post = self.api.wall.getComments(owner_id=owner_id, post_id=post_id, offset=offset, count=100, v=5.74)['items']
+            offset += 100
+            data += post
+        comments_count %= 100
+        if comments_count != 0:
+            post = self.api.wall.getComments(owner_id=owner_id, post_id=post_id, offset=offset, count=comments_count, v=5.74)[
+                'items']
+            data += post
         return data
 
     def create_new_account(self):
-        data = self.get_posts()
-        for i in data:
-            box = get_content_from_post(i)
-            box['tags'] = text_normalization(box['text'])
-            if not is_string_empty(box['text']):
+        posts = self.get_posts()
+        for i in posts:
+            post = get_content_from_post(i)
+            comments = get_content_from_comments(self.get_comments(i))
+            post['tags'] = text_normalization(post['text'])
+            post['comments'] = text_normalization(comments)
+            if not is_string_empty(post['text']):
                 post = Post.objects.create(
-                    owner_id=box['owner_id'],
-                    post_id=box['post_id'],
-                    text=box['text'],
-                    tags=box['tags'],
-                    link=box['link'])
+                    owner_id=post['owner_id'],
+                    post_id=post['post_id'],
+                    text=post['text'],
+                    tags=post['tags'],
+                    comments=post['comments'],
+                    link=post['link'])
                 post.save()
                 self.user.posts += ' ' + str(post.id)
         self.user.save()
@@ -194,14 +221,17 @@ class Tool:
             try:
                 Post.objects.get(owner_id=vk_id, post_id=post_id)
             except ObjectDoesNotExist:
-                box = get_content_from_post(i)
-                box['tags'] = text_normalization(box['text'])
-                if not is_string_empty(box['text']):
-                    post = Post.objects.create(owner_id=box['owner_id'],
-                                               post_id=box['post_id'],
-                                               text=box['text'],
-                                               tags=box['tags'],
-                                               link=box['link'])
+                post = get_content_from_post(i)
+                comments = get_content_from_comments(self.get_comments(i))
+                post['tags'] = text_normalization(post['text'])
+                post['comments'] = text_normalization(comments)
+                if not is_string_empty(post['text']):
+                    post = Post.objects.create(owner_id=post['owner_id'],
+                                               post_id=post['post_id'],
+                                               text=post['text'],
+                                               tags=post['tags'],
+                                               comments=post['comments'],
+                                               link=post['link'])
                     post.save()
                     self.user.posts += ' ' + str(post.id)
         self.user.save()
