@@ -11,8 +11,7 @@ def is_string_empty(s):
         return False
 
 
-def get_content_from_comments(data):
-    comments = data['items']
+def get_content_from_comments(comments):
     ret = ''
     for comment in comments:
         ret += ' ' + comment['text']
