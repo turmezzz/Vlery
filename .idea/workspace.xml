@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="09a6877f-5be6-4336-ace8-e94870f37b85" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/MainApp/templates/MainApp/output.html" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/templates/MainApp/output.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MainApp/tools.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainApp/tools.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -55,7 +54,7 @@
         <entry file="file://$PROJECT_DIR$/MainApp/tools.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="466">
-              <caret line="142" column="21" selection-start-line="142" selection-start-column="21" selection-end-line="142" selection-end-column="21" />
+              <caret line="142" column="20" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -698,7 +697,7 @@
     <entry file="file://$PROJECT_DIR$/MainApp/tools.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="466">
-          <caret line="142" column="21" selection-start-line="142" selection-start-column="21" selection-end-line="142" selection-end-column="21" />
+          <caret line="142" column="20" selection-start-line="142" selection-start-column="20" selection-end-line="142" selection-end-column="20" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

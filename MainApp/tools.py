@@ -140,7 +140,7 @@ def search(user, q):
     if len(data) == 0:
         box = Post()
         box.message = 'По вашему запросу не найдено постов'
-        data[box] = 1
+        return [box]
     post = []
     for i in data:
         post.append([data[i], i])
