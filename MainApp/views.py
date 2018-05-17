@@ -81,10 +81,7 @@ def search(request):
         name = tool.get_name()
 
         if len(posts) == 0:
-            box = Post()
-            box.message = 'По запросу не найдено постов'
-            messages = [box]
-
+            messages = ['По запросу не найдено постов']
 
         data = {'queue': q, 'img_url': img_url, 'name': name, 'posts': posts, 'messages': messages}
         return render(request, 'MainApp/output.html', data)
