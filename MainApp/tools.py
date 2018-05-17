@@ -137,6 +137,10 @@ def search(user, q):
             if post not in data:
                 data[post] = 0
             data[post] += 1
+    if len(data) == 0:
+        box = Post()
+        box.message = 'По вашему запросу не найдено постов'
+        data[box] = 1
     post = []
     for i in data:
         post.append([data[i], i])

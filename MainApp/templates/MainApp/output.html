@@ -30,13 +30,20 @@
 	    				перейти к оригиналу
 	    			</a>
 	    			<hr>
-	    			<p> {{ post.i }} </p>
 	    			<p class="txt">
 	    				{{ post.text }}
 	    			</p>
 	    			<!-- {% for img in post.imgs %}
 	    				<img src="img.link">
 	    			{% endfor %} -->
+	    		</div>
+	    	{% endfor %}
+	    	{% for message in messages %}
+	    		<div class="post">
+	    			<hr>
+	    			<p class="txt">
+	    				{{ post.message }}
+	    			</p>
 	    		</div>
 	    	{% endfor %}
     	</div>
