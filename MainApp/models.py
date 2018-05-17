@@ -19,7 +19,7 @@ class Post(models.Model):
     text = models.CharField(max_length=1000 * 1000, default='')
     link = models.CharField(max_length=1000, default='')
 
-    message = models.CharField(max_length=100, default='')
+    # message = models.CharField(max_length=100, default='')
 
 
 
