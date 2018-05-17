@@ -6,7 +6,7 @@ import vk
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib import auth
-from MainApp.models import User
+from MainApp.models import User, Post
 from . import tools
 
 # Create your views here.
@@ -76,9 +76,17 @@ def search(request):
         q = request.GET['q']
         tool = tools.Tool(request)
         posts = tools.search(request.user, q)
+        messages = []
         img_url = tool.get_img_url()
         name = tool.get_name()
-        data = {'queue': q, 'img_url': img_url, 'name': name, 'posts': posts}
+
+        if len(posts) == 0:
+            box = Post()
+            box.message = 'По запросу не найдено постов'
+            messages = [box]
+
+
+        data = {'queue': q, 'img_url': img_url, 'name': name, 'posts': posts, 'messages': messages}
         return render(request, 'MainApp/output.html', data)
     return HttpResponse('fuck u')
 
