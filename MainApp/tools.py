@@ -128,6 +128,11 @@ def search(user, q):
     data = {}
     for word in q_words:
         posts = Post.objects.filter(owner_id__exact=owner_id, tags__contains=word)
+
+        #
+        posts += Post.objects.filter(owner_id__exact=owner_id, comments__contains=word)
+        #
+
         for post in posts:
             if post not in data:
                 data[post] = 0
