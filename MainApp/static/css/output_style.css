@@ -57,10 +57,15 @@
 	padding-top: 10px;
 }
 
-.txt{
+.txt {
 	text-decoration: none;
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 15px;
+}
+
+.msg {
+	text-align: center;
+	font-size: 17px;
 }
 
 .post > hr {
