@@ -160,6 +160,7 @@ class Tool:
 
     def get_img_url(self):
         vk_id = self.user.username
+        ret = None
         try:
             ret = self.api.users.get(user_id=vk_id, v=5.74, fields='photo_50')[0]['photo_50']
         except Exception:
