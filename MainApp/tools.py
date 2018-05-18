@@ -199,6 +199,7 @@ class Tool:
         return data
 
     def create_new_account(self):
+        self.user.save()
         posts = self.get_posts()
         for i in posts:
             post = get_content_from_post(i)
