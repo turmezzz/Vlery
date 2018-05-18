@@ -153,32 +153,52 @@ class Tool:
         self.user = request.user
         access_token = self.user.access_token
         session = vk.Session(access_token=access_token)
-        self.api = vk.API(session)
+        try:
+            self.api = vk.API(session)
+        except Exception:
+            pass
 
     def get_img_url(self):
         vk_id = self.user.username
-        ret = self.api.users.get(user_id=vk_id, v=5.74, fields='photo_50')[0]['photo_50']
+        try:
+            ret = self.api.users.get(user_id=vk_id, v=5.74, fields='photo_50')[0]['photo_50']
+        except Exception:
+            pass
         return ret
 
     def get_name(self):
         vk_id = self.user.username
-        data = self.api.users.get(user_id=vk_id, v=5.74)
-        ret = data[0]['first_name']
+        ret = None
+        try:
+            data = self.api.users.get(user_id=vk_id, v=5.74)
+            ret = data[0]['first_name']
+        except Exception:
+            pass
         return ret
 
     def get_posts(self):
         vk_id = self.user.username
-        post_count = self.api.wall.get(owner_id=vk_id, count=1, v=5.74)['count']
+        post_count = 0
+        try:
+            post_count = self.api.wall.get(owner_id=vk_id, count=1, v=5.74)['count']
+        except Exception:
+            pass
         data = []
         offset = 0
         for i in range(post_count // 100):
-            post = self.api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
+            try:
+                post = self.api.wall.get(owner_id=vk_id, offset=offset, count=100, v=5.74)['items']
+            except Exception:
+                pass
             offset += 100
             data += post
         post_count %= 100
         if post_count != 0:
-            post = self.api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
-            data += post
+            try:
+                post = self.api.wall.get(owner_id=vk_id, offset=offset, count=post_count, v=5.74)['items']
+                data += post
+            except Exception:
+                pass
         return data
 
     def get_comments(self, post):
@@ -188,14 +208,19 @@ class Tool:
         data = []
         offset = 0
         for i in range(comments_count // 100):
-            post = self.api.wall.getComments(owner_id=owner_id, post_id=post_id, offset=offset, count=100, v=5.74)['items']
+            try:
+                post = self.api.wall.getComments(owner_id=owner_id, post_id=post_id, offset=offset, count=100, v=5.74)['items']
+            except Exception:
+                pass
             offset += 100
             data += post
         comments_count %= 100
         if comments_count != 0:
-            post = self.api.wall.getComments(owner_id=owner_id, post_id=post_id, offset=offset, count=comments_count, v=5.74)[
-                'items']
-            data += post
+            try:
+                post = self.api.wall.getComments(owner_id=owner_id, post_id=post_id, offset=offset, count=comments_count, v=5.74)['items']
+                data += post
+            except Exception:
+                pass
         return data
 
     def create_new_account(self):
