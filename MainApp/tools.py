@@ -130,7 +130,7 @@ def search(user, q):
         posts = list(Post.objects.filter(owner_id__exact=owner_id, tags__contains=word))
 
         #
-        posts += list(Post.objects.filter(owner_id__exact=owner_id, comments__contains=word))
+        # posts += list(Post.objects.filter(owner_id__exact=owner_id, comments__contains=word))
         #
 
         for post in posts:
@@ -234,14 +234,15 @@ class Tool:
             post = get_content_from_post(i)
             comments = get_content_from_comments(self.get_comments(i))
             post['tags'] = text_normalization(post['text'])
-            post['comments'] = text_normalization(comments)
+            post['tags'] += text_normalization(comments)
+            # post['comments'] = text_normalization(comments)
             if not is_string_empty(post['text']):
                 post = Post.objects.create(
                     owner_id=post['owner_id'],
                     post_id=post['post_id'],
                     text=post['text'],
                     tags=post['tags'],
-                    comments=post['comments'],
+                    # comments=post['comments'],
                     link=post['link'])
                 post.save()
                 self.user.posts += ' ' + str(post.id)
@@ -258,19 +259,16 @@ class Tool:
                 post = get_content_from_post(i)
                 comments = get_content_from_comments(self.get_comments(i))
                 post['tags'] = text_normalization(post['text'])
-                post['comments'] = text_normalization(comments)
+                post['tags'] += text_normalization(comments)
+                # post['comments'] = text_normalization(comments)
                 if not is_string_empty(post['text']):
                     post = Post.objects.create(owner_id=post['owner_id'],
                                                post_id=post['post_id'],
                                                text=post['text'],
                                                tags=post['tags'],
-                                               comments=post['comments'],
+                                               # comments=post['comments'],
                                                link=post['link'])
                     post.save()
                     self.user.posts += ' ' + str(post.id)
         self.user.save()
-
-
-
-
 
