@@ -69,7 +69,7 @@ def text_normalization(text):
     return ' '.join(data)
 
 
-def queue_normalization(q):
+def query_normalization(q):
     def need_space(s):
         if s == '' or s[-1] == ' ':
             return False
@@ -123,7 +123,7 @@ def queue_normalization(q):
 
 def search(user, q):
     owner_id = user.username
-    q = queue_normalization(q)
+    q = query_normalization(q)
     q_words = q.split()
     data = {}
     for word in q_words:

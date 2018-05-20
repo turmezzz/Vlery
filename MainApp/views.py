@@ -83,7 +83,7 @@ def search(request):
         if len(posts) == 0:
             messages = ['По запросу не найдено постов']
 
-        data = {'queue': q, 'img_url': img_url, 'name': name, 'posts': posts, 'messages': messages}
+        data = {'query': q, 'img_url': img_url, 'name': name, 'posts': posts, 'messages': messages}
         return render(request, 'MainApp/output.html', data)
     return HttpResponse('fuck u')
 
