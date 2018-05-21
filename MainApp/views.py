@@ -85,5 +85,5 @@ def search(request):
 
         data = {'query': q, 'img_url': img_url, 'name': name, 'posts': posts, 'messages': messages}
         return render(request, 'MainApp/output.html', data)
-    return HttpResponse('fuck u')
+    return HttpResponse('reload page')
 

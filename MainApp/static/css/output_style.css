@@ -80,10 +80,6 @@
 	color: grey;
 }
 
-.output {	
-	/*some shit*/
-}
-
 .border {
 	border: 2px solid red;
 }
@@ -135,13 +131,4 @@ body {
 	font-family: 'Open Sans', Arial, sans-serif;
 	font-size: 14px;
 	margin: 0px;
-	/*height: 100%;*/
 }
-
-/*a { 
-    text-decoration: none;
-} */
-
-/*html {
-	height: 100%;
-}*/
